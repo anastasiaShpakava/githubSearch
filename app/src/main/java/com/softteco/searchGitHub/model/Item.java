@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Item {
-    @SerializedName("id")
-    private int id;
 
     @SerializedName("full_name")
     private String full_name;
@@ -15,14 +13,6 @@ public class Item {
 
     @SerializedName("html_url")
     private String url;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getFull_name() {
         return full_name;

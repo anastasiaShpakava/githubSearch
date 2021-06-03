@@ -11,12 +11,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.softteco.searchGitHub.model.Item;
 import com.softteco.searchGitHub.network.ResponseObject;
 import com.softteco.searchGitHub.ui.ItemAdapter;
 import com.softteco.searchGitHub.ui.ItemViewModel;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ItemViewModel itemViewModel;
@@ -41,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(ResponseObject responseObject) {
                 adapter.setItems(responseObject.getItems());
             }
-
         });
         textInputEditText = findViewById(R.id.et_search);
         search = findViewById(R.id.ib_search);
@@ -49,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String q = textInputEditText.getText().toString();
-                if(!q.isEmpty())
-                {
+                if (!q.isEmpty()) {
                     itemViewModel.searchItems(q);
                 }
             }
         });
-
     }
 }

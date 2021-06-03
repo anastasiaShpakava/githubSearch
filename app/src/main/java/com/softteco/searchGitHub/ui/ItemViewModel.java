@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.softteco.searchGitHub.model.Item;
 import com.softteco.searchGitHub.network.ResponseObject;
 import com.softteco.searchGitHub.repository.ItemRepository;
 

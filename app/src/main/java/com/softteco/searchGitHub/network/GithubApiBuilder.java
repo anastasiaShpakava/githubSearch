@@ -34,6 +34,4 @@ public class GithubApiBuilder {
     public GitHubClient getService() {
         return retrofit.create(GitHubClient.class);
     }
-
-
 }

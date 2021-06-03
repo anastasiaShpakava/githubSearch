@@ -28,18 +28,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         context = parent.getContext();
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_items, parent, false);
-        return new ItemViewHolder (itemView);
+        return new ItemViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, int position) {
-       Item item =items.get(position);
-        if(item.getFull_name() != null && !TextUtils.isEmpty(item.getFull_name())) {
+        Item item = items.get(position);
+        if (item.getFull_name() != null && !TextUtils.isEmpty(item.getFull_name())) {
             holder.name.setText(item.getFull_name());
             holder.description.setText(item.getDescription());
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -51,10 +50,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         notifyDataSetChanged();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder{
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView description;
-
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,8 +69,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             });
         }
     }
-
-
 }
 
 
