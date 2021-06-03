@@ -7,15 +7,29 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.softteco.searchGitHub.model.Item;
+import com.softteco.searchGitHub.network.ResponseObject;
+import com.softteco.searchGitHub.repository.ItemRepository;
 
-import java.util.List;
 
 public class ItemViewModel extends AndroidViewModel {
 
-    private LiveData<List<Item>> allItems;
-
+    private ItemRepository itemRepository;
+    private LiveData<ResponseObject> itemsResponseLiveData;
 
     public ItemViewModel(@NonNull Application application) {
         super(application);
+    }
+
+    public void init() {
+        itemRepository = new ItemRepository();
+        itemsResponseLiveData = itemRepository.getItemsResponseLiveData();
+    }
+
+    public void searchItems(String q) {
+     itemRepository.fetchData(q);
+    }
+
+    public LiveData<ResponseObject> getItemsResponseLiveData() {
+        return itemsResponseLiveData;
     }
 }
