@@ -7,12 +7,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GithubApiBuilder {
+public class RestApiBuilder {
     public static final String BASE_URL = "https://api.github.com";
 
     private Retrofit retrofit;
 
-    public GithubApiBuilder() {
+    public RestApiBuilder() {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -31,7 +31,7 @@ public class GithubApiBuilder {
                 .build();
     }
 
-    public GitHubClient getService() {
-        return retrofit.create(GitHubClient.class);
+    public RestClient getService() {
+        return retrofit.create(RestClient.class);
     }
 }

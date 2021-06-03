@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.softteco.searchGitHub.R;
 import com.softteco.searchGitHub.model.Item;
 
@@ -37,6 +39,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         if (item.getFull_name() != null && !TextUtils.isEmpty(item.getFull_name())) {
             holder.name.setText(item.getFull_name());
             holder.description.setText(item.getDescription());
+            holder.watchers.setText(String.valueOf(item.getWatchers_count()));
+            holder.stars.setText(String.valueOf(item.getStargazers_count()));
+            holder.forks.setText(String.valueOf(item.getForks_count()));
         }
     }
 
@@ -53,19 +58,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView description;
+        private ChipGroup chipGroup;
+        private Chip watchers;
+        private Chip stars;
+        private Chip forks;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             description = itemView.findViewById(R.id.description);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String url = items.get(getAdapterPosition()).getUrl();
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    context.startActivity(browserIntent);
-                }
+            chipGroup = itemView.findViewById(R.id.chip_group);
+            watchers = chipGroup.findViewById(R.id.watchers);
+            stars = chipGroup.findViewById(R.id.stars);
+            forks = chipGroup.findViewById(R.id.forks);
+
+            itemView.setOnClickListener(view -> {
+                String url = items.get(getAdapterPosition()).getUrl();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                context.startActivity(browserIntent);
             });
         }
     }
