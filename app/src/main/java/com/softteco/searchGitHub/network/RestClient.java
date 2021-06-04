@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 public interface RestClient {
     @GET("/search/repositories")
     Call<Root> searchRepos(
-            @Query("q") String q
-    );
+            @Query("q") String q,
+            @Query("page") int page,
+            @Query("per_page") int itemsPerPage);
 }

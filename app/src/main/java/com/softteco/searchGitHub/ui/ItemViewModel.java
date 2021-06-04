@@ -24,8 +24,8 @@ public class ItemViewModel extends AndroidViewModel {
         itemsResponseLiveData = itemRepository.getItemsResponseLiveData();
     }
 
-    public void searchItems(String q) {
-     itemRepository.fetchData(q);
+    public void searchItems(String q, int page, int resultsPerPage) {
+     itemRepository.fetchData(q, page, resultsPerPage);
     }
 
     public LiveData<Root> getItemsResponseLiveData() {

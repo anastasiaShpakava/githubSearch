@@ -45,6 +45,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
     }
 
+    public void addItems(List<Item> newItem ) {
+        this.items = newItem;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return items.size();
@@ -81,5 +86,4 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
     }
 }
-
 

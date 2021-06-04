@@ -41,13 +41,13 @@
                     android:id="@+id/watchers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipIcon="@drawable/watchers_icon" />
+                    app:chipIcon="@drawable/watcher_icon" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:chipIcon="@drawable/star_icon" />
+                    app:chipIcon="@drawable/stars_icon" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/forks"
