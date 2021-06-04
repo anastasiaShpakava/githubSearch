@@ -1,6 +1,7 @@
 package com.softteco.searchGitHub.repository;
 
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -13,9 +14,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ItemRepository {
-    private MutableLiveData<Root> itemsResponseLiveData;
-    private RestClient restClient;
-    private Call<Root> callItems;
+    private final MutableLiveData<Root> itemsResponseLiveData;
+    private final RestClient restClient;
 
     public ItemRepository() {
         itemsResponseLiveData = new MutableLiveData<>();
@@ -23,14 +23,14 @@ public class ItemRepository {
     }
 
     public void fetchData(String q) {
-        callItems = restClient.searchRepos(q);
+        Call<Root> callItems = restClient.searchRepos(q);
         callItems.enqueue(new Callback<Root>() {
             @Override
-            public void onResponse(Call<Root> call, Response<Root> response) {
+            public void onResponse(@NonNull Call<Root> call, @NonNull Response<Root> response) {
                 itemsResponseLiveData.postValue(response.body());
             }
             @Override
-            public void onFailure(Call<Root> call, Throwable t) {
+            public void onFailure(@NonNull Call<Root> call, @NonNull Throwable t) {
             }
         });
     }
