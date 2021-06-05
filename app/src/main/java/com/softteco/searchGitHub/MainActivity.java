@@ -13,9 +13,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.softteco.searchGitHub.model.Item;
 import com.softteco.searchGitHub.ui.ItemAdapter;
 import com.softteco.searchGitHub.ui.ItemViewModel;
 
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private String q;
     private int page = 1;
-    private final int resultsPerPage = 30;
+    private final int resultsPerPage = 8;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -54,9 +56,15 @@ public class MainActivity extends AppCompatActivity {
             String totalResults = getString(R.string.total_count, result);
             adapter.setItems(responseObject.getItems());
             textView.setText(totalResults);
+
         });
 
         pagesPagination();
+
+        itemViewModel.getNewItem().observe(this, responseObject -> {
+            adapter.notifyDataSetChanged();
+        });
+
 
         textInputEditText = findViewById(R.id.et_search);
         search = findViewById(R.id.ib_search);
@@ -79,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                             adapter.getItemCount() - 1) {
                         page++;
                         itemViewModel.searchItems(q, page, resultsPerPage);
-                       // adapter.addItems(responseObject.getItems());
                     }
                 }
             }

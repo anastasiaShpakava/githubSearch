@@ -42,11 +42,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             holder.watchers.setText(String.valueOf(item.getWatchers_count()));
             holder.stars.setText(String.valueOf(item.getStargazers_count()));
             holder.forks.setText(String.valueOf(item.getForks_count()));
+
         }
     }
 
     public void addItems(List<Item> newItem ) {
-        this.items = newItem;
+        items.addAll(newItem);
         notifyDataSetChanged();
     }
 
