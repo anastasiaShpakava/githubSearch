@@ -17,7 +17,7 @@ import com.softteco.searchGitHub.model.Item;
 import com.softteco.searchGitHub.ui.ItemAdapter;
 import com.softteco.searchGitHub.ui.ItemViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private String q;
     private int page = 1;
-    private final int resultsPerPage = 8;
+    private final int resultsPerPage = 50;
+    private ArrayList<Item> items = new ArrayList<>();
+    private int resultTotalCount;
 
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,24 +47,23 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new ItemAdapter();
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         itemViewModel.init();
         itemViewModel.getItemsResponseLiveData().observe(this, responseObject -> {
-            String result = String.valueOf(responseObject.getTotal_count());
+            resultTotalCount = responseObject.getTotal_count();
+            String result = String.valueOf(resultTotalCount);
             String totalResults = getString(R.string.total_count, result);
-            adapter.setItems(responseObject.getItems());
+
             textView.setText(totalResults);
+            items.addAll(responseObject.getItems());
+            adapter.setItems(items);
 
         });
 
         pagesPagination();
-
-        itemViewModel.getNewItem().observe(this, responseObject -> {
-            adapter.notifyDataSetChanged();
-        });
-
 
         textInputEditText = findViewById(R.id.et_search);
         search = findViewById(R.id.ib_search);
@@ -85,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 if (!recyclerView.canScrollVertically(1) && dy != 0) {
                     if (layoutManager.findLastCompletelyVisibleItemPosition() ==
                             adapter.getItemCount() - 1) {
-                        page++;
-                        itemViewModel.searchItems(q, page, resultsPerPage);
+                        if (items.size() < resultTotalCount) {
+                            page++;
+                            itemViewModel.searchItems(q, page, resultsPerPage);
+                        }
                     }
                 }
             }

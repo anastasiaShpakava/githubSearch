@@ -5,14 +5,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.softteco.searchGitHub.model.Item;
 import com.softteco.searchGitHub.model.Root;
 import com.softteco.searchGitHub.network.RestClient;
 import com.softteco.searchGitHub.network.RestApiBuilder;
-import com.softteco.searchGitHub.ui.ItemAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +32,7 @@ public class ItemRepository {
 
             @Override
             public void onFailure(@NonNull Call<Root> call, @NonNull Throwable t) {
+
             }
         });
     }
